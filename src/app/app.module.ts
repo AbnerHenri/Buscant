@@ -21,7 +21,7 @@ import { AutoriaPipe } from './pipes/autoria.pipe';
     LivroComponent,
     ListaLivrosComponent,
     ModalLivroComponent,
-    AutoriaPipe
+    AutoriaPipe,
   ],
   imports: [
     BrowserModule,
@@ -29,9 +29,9 @@ import { AutoriaPipe } from './pipes/autoria.pipe';
     RouterModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -7,7 +7,7 @@ import { Livro } from 'src/app/models/intefaces';
   styleUrls: ['./livro.component.css'],
 })
 export class LivroComponent {
-  @Input() livro: Livro;
+  @Input() livro: any;
   modalAberto: boolean;
 
   onModalChange(evento: boolean) {
