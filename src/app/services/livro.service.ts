@@ -15,9 +15,8 @@ export class LivroService {
   find(enteredValue: string): Observable<Item[]> {
     const params = new HttpParams().append('q', enteredValue);
     return this.http.get<LivroResultado>(this.API, { params }).pipe(
-      tap((resAPI) => console.log('Primeiro Fluxo', resAPI)),
-      map((resMap) => resMap.items),
-      tap((resTap) => console.log('Fluxo após Map', resTap))
+      map((resMap) => resMap.items)
+      // tap((res) => console.log(res))
     );
   }
 }
