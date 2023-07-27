@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {
   catchError,
@@ -8,7 +8,7 @@ import {
   switchMap,
   throwError,
 } from 'rxjs';
-import { Item } from 'src/app/models/intefaces';
+import { Item, LivroResultado } from 'src/app/models/intefaces';
 import { LivroVolumeInfo } from 'src/app/models/livroVolumeInfo';
 import { LivroService } from 'src/app/services/livro.service';
 
@@ -20,6 +20,7 @@ import { LivroService } from 'src/app/services/livro.service';
 export class ListaLivrosComponent {
   campoBusca = new FormControl();
   mensagemErro = '';
+  livrosResultado: LivroResultado;
   pausa = 300;
 
   constructor(private service: LivroService) {}
@@ -28,7 +29,8 @@ export class ListaLivrosComponent {
     debounceTime(this.pausa),
     filter((valorDigitado) => valorDigitado.length >= 3),
     switchMap((valorDigitado) => this.service.find(valorDigitado)),
-    map((items) => this.resultBooks(items)),
+    map((items) => (this.livrosResultado = items)),
+    map((items) => this.resultBooks(items.items) ?? []),
     catchError((err) => {
       console.log(err);
       return throwError(

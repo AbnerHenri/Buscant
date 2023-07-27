@@ -6,12 +6,10 @@
       <img src="assets/imagens/icone-busca.png" alt="Lupa de cor roxa" />
     </button>
   </div>
-  <p *ngIf="!mensagemErro; else mensagemErroTemplate">
-    Busque por assunto, autoria, nome...
-  </p>
-  <ng-template #mensagemErroTemplate>
-    <p id="mensagem-erro">{{ mensagemErro }}</p>
-  </ng-template>
+  <p>Busque por assunto, autoria, nome...</p>
+  <div class="resultados" *ngIf="livrosEncontrados$ | async">
+    Resultados encontrados : <b>{{ livrosResultado.totalItems }}</b>
+  </div>
   <div
     class="container-card"
     *ngIf="livrosEncontrados$ | async as listaLivros; else telaInicial"
@@ -20,6 +18,7 @@
       <app-livro [livro]="livro"></app-livro>
     </div>
   </div>
+
   <ng-template #telaInicial>
     <div class="imagens">
       <h1 class="titulo">

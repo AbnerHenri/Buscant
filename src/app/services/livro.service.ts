@@ -12,11 +12,8 @@ export class LivroService {
 
   private readonly API = 'https://www.googleapis.com/books/v1/volumes?';
 
-  find(enteredValue: string): Observable<Item[]> {
+  find(enteredValue: string): Observable<LivroResultado> {
     const params = new HttpParams().append('q', enteredValue);
-    return this.http.get<LivroResultado>(this.API, { params }).pipe(
-      map((resMap) => resMap.items)
-      // tap((res) => console.log(res))
-    );
+    return this.http.get<LivroResultado>(this.API, { params });
   }
 }
