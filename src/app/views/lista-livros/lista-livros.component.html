@@ -6,7 +6,12 @@
       <img src="assets/imagens/icone-busca.png" alt="Lupa de cor roxa" />
     </button>
   </div>
-  <p>Busque por assunto, autoria, nome...</p>
+  <p *ngIf="!mensagemErro; else mensagemErroTemplate">
+    Busque por assunto, autoria, nome...
+  </p>
+  <ng-template #mensagemErroTemplate>
+    <p id="mensagem-erro">{{ mensagemErro }}</p>
+  </ng-template>
   <div
     class="container-card"
     *ngIf="livrosEncontrados$ | async as listaLivros; else telaInicial"

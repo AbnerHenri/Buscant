@@ -47,6 +47,10 @@ section p {
   color: #8b8b8b;
 }
 
+#mensagem-erro {
+  color: #ff7878;
+}
+
 .resultados {
   display: flex;
   justify-content: center;
@@ -57,10 +61,6 @@ section p {
   font-size: 16px;
   line-height: 24px;
   color: #8b8b8b;
-}
-
-.mensagem-erro {
-  color: #6c63ff;
 }
 
 input[type="search"]:focus {

@@ -1,7 +1,14 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { debounceTime, filter, map, switchMap, tap } from 'rxjs';
-import { Item, Livro } from 'src/app/models/intefaces';
+import {
+  catchError,
+  debounceTime,
+  filter,
+  map,
+  switchMap,
+  throwError,
+} from 'rxjs';
+import { Item } from 'src/app/models/intefaces';
 import { LivroVolumeInfo } from 'src/app/models/livroVolumeInfo';
 import { LivroService } from 'src/app/services/livro.service';
 
@@ -12,6 +19,7 @@ import { LivroService } from 'src/app/services/livro.service';
 })
 export class ListaLivrosComponent {
   campoBusca = new FormControl();
+  mensagemErro = '';
   pausa = 300;
 
   constructor(private service: LivroService) {}
@@ -21,7 +29,12 @@ export class ListaLivrosComponent {
     filter((valorDigitado) => valorDigitado.length >= 3),
     switchMap((valorDigitado) => this.service.find(valorDigitado)),
     map((items) => this.resultBooks(items)),
-    tap((res) => console.log(res))
+    catchError((err) => {
+      console.log(err);
+      return throwError(
+        () => new Error((this.mensagemErro = 'Ops, Houve um erro'))
+      );
+    })
   );
 
   resultBooks(items: Item[]): LivroVolumeInfo[] {
